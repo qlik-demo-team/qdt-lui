@@ -1,21 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * @extends node-def
+ * @typedef {object} node--image-def
+ * @property {number} href
+ * @property {number} x
+ * @property {number} y
+ * @property {number} width
+ * @property {number} height
+ */
+
+let inputSearch = null;
 const LuiSearch = ({
-  placeholder, inverse, onClear, onType,
+  placeholder, inverse, onClear, onChange, onKeyDown,
 }) => {
-  let inputSearch = null;
   const clear = () => {
     inputSearch.value = '';
     if (onClear) onClear();
   };
-  const change = (e) => {
-    if (onType) onType(e.key);
+  const change = () => {
+    if (onChange) onChange(inputSearch.value);
+  };
+  const keyDown = (event) => {
+    if (onKeyDown) onKeyDown(event.key);
+    if (event.key === 'enter' || event.key === 'Enter') inputSearch.value = '';
   };
   return (
     <div className={(inverse) ? 'lui-search lui-search--inverse' : 'lui-search'} >
       <span className="lui-icon  lui-icon--search  lui-search__search-icon" />
-      <input className="lui-search__input" maxLength="255" type="text" placeholder={placeholder} ref={elem => inputSearch = elem} onKeyPress={change} />
+      <input className="lui-search__input" maxLength="255" type="text" placeholder={placeholder} ref={elem => inputSearch = elem} onChange={change} onKeyDown={keyDown} />
       <button className="lui-search__clear-button" tabIndex={0} key="clear" onClick={clear}>
         <span className="lui-icon  lui-icon--small  lui-icon--close" />
       </button>
@@ -26,13 +40,15 @@ LuiSearch.propTypes = {
   placeholder: PropTypes.string,
   inverse: PropTypes.bool,
   onClear: PropTypes.func,
-  onType: PropTypes.func,
+  onChange: PropTypes.func,
+  onKeyDown: PropTypes.func,
 };
 LuiSearch.defaultProps = {
   placeholder: 'Search',
   inverse: false,
   onClear: null,
-  onType: null,
+  onChange: null,
+  onKeyDown: null,
 };
 
 export default LuiSearch;
