@@ -56,6 +56,7 @@ class LuiSearch extends React.Component {
           onChange={this.change}
           onKeyDown={this.keyDown}
           onFocus={this.focus}
+          value={this.state.value}
         />
         <button className="lui-search__clear-button" tabIndex={0} key="clear" onClick={this.clear}>
           <span className="lui-icon  lui-icon--small  lui-icon--close" />
