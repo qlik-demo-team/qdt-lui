@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const LuiList = ({ children, className, inverse, style }) => (
-  <ul 
+const LuiList = ({
+  children, className, inverse, style,
+}) => (
+  <ul
     className={`
       lui-list
       ${inverse ? 'lui-list--inverse' : null}
@@ -23,7 +25,7 @@ LuiList.defaultProps = {
   children: null,
   className: null,
   inverse: null,
-  style: null
+  style: null,
 };
 
 export default LuiList;

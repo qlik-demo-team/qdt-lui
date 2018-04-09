@@ -12,7 +12,7 @@ LuiListItem.propTypes = {
 };
 LuiListItem.defaultProps = {
   children: null,
-  onClick: null
+  onClick: null,
 };
 
 export default LuiListItem;

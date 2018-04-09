@@ -4,16 +4,20 @@ import PropTypes from 'prop-types';
 class LuiDropdown extends React.Component {
   static propTypes = {
     children: PropTypes.node,
+    className: PropTypes.string,
     gradient: PropTypes.bool,
     inverse: PropTypes.bool,
     isOpen: PropTypes.bool,
+    style: PropTypes.object,
     toggle: PropTypes.func,
   };
   static defaultProps = {
     children: null,
+    className: null,
     gradient: null,
     inverse: null,
     isOpen: false,
+    style: null,
     toggle: null,
   };
 
@@ -39,7 +43,7 @@ class LuiDropdown extends React.Component {
     const {
       children, className, gradient, inverse, isOpen, style,
     } = this.props;
-    const [value, menu, ...other] = this.children;
+    const [value, menu, ...other] = children;
     return (
       <div
         ref={node => this.node = node}
