@@ -66,8 +66,10 @@ class LuiDropdown extends React.Component {
         <div style={{
           display: isOpen ? 'block' : 'none',
           position: 'absolute',
-          width: 'calc(100% - 2px)',
+          background: '#fff',
           border: '1px solid #ccc',
+          marginTop: 4,
+          zIndex: 1,
         }}
         >
           {menu}
