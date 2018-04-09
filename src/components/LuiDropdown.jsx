@@ -37,12 +37,14 @@ class LuiDropdown extends React.Component {
 
   render() {
     const {
-      children, gradient, inverse, isOpen,
+      children, className, gradient, inverse, isOpen, style,
     } = this.props;
+    const [value, menu, ...other] = this.children;
     return (
       <div
         ref={node => this.node = node}
-        style={{ position: 'relative' }}
+        className={className}
+        style={{ position: 'relative', ...style }}
       >
         <div
           className={`
@@ -55,7 +57,7 @@ class LuiDropdown extends React.Component {
           tabIndex="0"
           onClick={this.handleToggle}
         >
-          {children[0]}
+          {value}
         </div>
         <div style={{
           display: isOpen ? 'block' : 'none',
@@ -64,8 +66,9 @@ class LuiDropdown extends React.Component {
           border: '1px solid #ccc',
         }}
         >
-          {children[1]}
+          {menu}
         </div>
+        {other}
       </div>
     );
   }
