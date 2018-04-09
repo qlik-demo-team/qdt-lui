@@ -8,6 +8,7 @@ class LuiDropdown extends React.Component {
     gradient: PropTypes.bool,
     inverse: PropTypes.bool,
     isOpen: PropTypes.bool,
+    select: PropTypes.bool,
     style: PropTypes.object,
     toggle: PropTypes.func,
   };
@@ -17,6 +18,7 @@ class LuiDropdown extends React.Component {
     gradient: null,
     inverse: null,
     isOpen: false,
+    select: true,
     style: null,
     toggle: null,
   };
@@ -41,7 +43,7 @@ class LuiDropdown extends React.Component {
 
   render() {
     const {
-      children, className, gradient, inverse, isOpen, style,
+      children, className, gradient, inverse, isOpen, select, style,
     } = this.props;
     const [value, menu, ...other] = children;
     return (
@@ -52,11 +54,12 @@ class LuiDropdown extends React.Component {
       >
         <div
           className={`
-              lui-select 
+              ${select ? 'lui-select' : null} 
               ${gradient ? 'lui-select--gradient' : null}
               ${inverse ? 'lui-select--inverse' : null}
               ${gradient && inverse ? 'lui-select--gradient-inverse' : null}
             `}
+          style={{ border: select ? null : '1px solid #B3B3B3' }}
           role="button"
           tabIndex="0"
           onClick={this.handleToggle}
