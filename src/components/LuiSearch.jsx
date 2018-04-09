@@ -1,59 +1,68 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-/**
- * @extends node-def
- * @typedef {object} node--image-def
- * @property {number} href
- * @property {number} x
- * @property {number} y
- * @property {number} width
- * @property {number} height
- */
+class LuiSearch extends React.Component {
+  static propTypes = {
+    placeholder: PropTypes.string,
+    inverse: PropTypes.bool,
+    onClear: PropTypes.func,
+    onChange: PropTypes.func,
+    onKeyDown: PropTypes.func,
+    onFocus: PropTypes.func,
+  };
+  static defaultProps = {
+    placeholder: 'Search',
+    inverse: false,
+    onClear: null,
+    onChange: null,
+    onKeyDown: null,
+    onFocus: null,
+  };
 
-let inputSearch = null;
-const LuiSearch = ({
-  placeholder, inverse, onClear, onChange, onKeyDown, onFocus,
-}) => {
-  const clear = () => {
-    inputSearch.value = '';
+  state = {
+    value: '',
+  }
+
+  clear = () => {
+    const { onClear } = this.props;
+    this.setState({ value: '' });
     if (onClear) onClear();
   };
-  const change = () => {
-    if (onChange) onChange(inputSearch.value);
+  change = () => {
+    const { onChange } = this.props;
+    if (onChange) onChange(this.state.value);
   };
-  const keyDown = (event) => {
+  keyDown = (event) => {
+    const { onKeyDown } = this.props;
     if (onKeyDown) onKeyDown(event.key);
-    if (event.key === 'enter' || event.key === 'Enter') inputSearch.value = '';
+    if (event.key === 'enter' || event.key === 'Enter') this.setState({ value: '' });
   };
-  const focus = () => {
+  focus = () => {
+    const { onFocus } = this.props;
     if (onFocus) onFocus();
   };
-  return (
-    <div className={(inverse) ? 'lui-search lui-search--inverse' : 'lui-search'} >
-      <span className="lui-icon  lui-icon--search  lui-search__search-icon" />
-      <input className="lui-search__input" maxLength="255" type="text" placeholder={placeholder} ref={elem => inputSearch = elem} onChange={change} onKeyDown={keyDown} onFocus={focus} />
-      <button className="lui-search__clear-button" tabIndex={0} key="clear" onClick={clear}>
-        <span className="lui-icon  lui-icon--small  lui-icon--close" />
-      </button>
-    </div>
-  );
-};
-LuiSearch.propTypes = {
-  placeholder: PropTypes.string,
-  inverse: PropTypes.bool,
-  onClear: PropTypes.func,
-  onChange: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  onFocus: PropTypes.func,
-};
-LuiSearch.defaultProps = {
-  placeholder: 'Search',
-  inverse: false,
-  onClear: null,
-  onChange: null,
-  onKeyDown: null,
-  onFocus: null,
-};
+
+  render() {
+    const { placeholder, inverse } = this.props;
+
+    return (
+      <div className={(inverse) ? 'lui-search lui-search--inverse' : 'lui-search'} >
+        <span className="lui-icon  lui-icon--search  lui-search__search-icon" />
+        <input
+          className="lui-search__input"
+          maxLength="255"
+          type="text"
+          placeholder={placeholder}
+          onChange={this.change}
+          onKeyDown={this.keyDown}
+          onFocus={this.focus}
+        />
+        <button className="lui-search__clear-button" tabIndex={0} key="clear" onClick={this.clear}>
+          <span className="lui-icon  lui-icon--small  lui-icon--close" />
+        </button>
+      </div>
+    );
+  }
+}
 
 export default LuiSearch;
