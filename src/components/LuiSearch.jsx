@@ -28,9 +28,10 @@ class LuiSearch extends React.Component {
     this.setState({ value: '' });
     if (onClear) onClear();
   };
-  change = () => {
+  change = (event) => {
     const { onChange } = this.props;
-    if (onChange) onChange(this.state.value);
+    this.setState({ value: event.target.value });
+    if (onChange) onChange(event.target.value);
   };
   keyDown = (event) => {
     const { onKeyDown } = this.props;
