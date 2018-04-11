@@ -72,7 +72,8 @@ class LuiDropdown extends React.Component {
           background: '#fff',
           border: '1px solid #ccc',
           marginTop: 4,
-          zIndex: 1,
+          zIndex: 99999,
+          cursor: 'pointer',
         }}
         >
           {menu}
