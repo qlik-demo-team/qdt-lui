@@ -54,12 +54,11 @@ class LuiDropdown extends React.Component {
       >
         <div
           className={`
-              ${select ? 'lui-select' : null} 
-              ${gradient ? 'lui-select--gradient' : null}
-              ${inverse ? 'lui-select--inverse' : null}
-              ${gradient && inverse ? 'lui-select--gradient-inverse' : null}
+              ${select ? 'lui-select' : ''} 
+              ${gradient ? 'lui-select--gradient' : ''}
+              ${inverse ? 'lui-select--inverse' : ''}
+              ${gradient && inverse ? 'lui-select--gradient-inverse' : ''}
             `}
-          style={{ border: select ? null : '1px solid #B3B3B3' }}
           role="button"
           tabIndex="0"
           onClick={this.handleToggle}
