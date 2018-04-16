@@ -34,11 +34,11 @@ class LuiDropdown extends React.Component {
   handleClick = (event) => {
     const outsideClick = !this.node.contains(event.target);
     const { isOpen } = this.props;
-    if (isOpen && outsideClick) this.handleToggle();
+    if (isOpen && outsideClick) this.handleToggle(event);
   }
 
-  handleToggle = () => {
-    this.props.toggle();
+  handleToggle = (event) => {
+    this.props.toggle(event);
   }
 
   render() {
