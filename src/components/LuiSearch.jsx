@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const LuiSearch = ({
+const LuiSearch = ({ 
   clear, inverse, placeholder, value, ...otherProps
 }) => {
   const button = (value.length) ? (<button className="lui-search__clear-button" tabIndex={0} key="clear" onClick={clear}>
