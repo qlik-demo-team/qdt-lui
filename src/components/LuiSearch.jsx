@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const LuiSearch = ({ 
+const LuiSearch = ({
   clear, inverse, placeholder, value, ...otherProps
 }) => {
-  const button = (value.length) ? (<button className="lui-search__clear-button" tabIndex={0} key="clear" onClick={clear}>
-    <span className="lui-icon  lui-icon--small  lui-icon--close" />
-  </button>) : '';
+  const button = (value.length) ? (
+    <button className="lui-search__clear-button" tabIndex={0} key="clear" onClick={clear}>
+      <span className="lui-icon  lui-icon--small  lui-icon--close" />
+    </button>
+  ) : '';
   return (
     <div className={(inverse) ? 'lui-search lui-search--inverse' : 'lui-search'} >
       <span className="lui-icon  lui-icon--search  lui-search__search-icon" />
