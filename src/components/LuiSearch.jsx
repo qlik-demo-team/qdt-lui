@@ -1,17 +1,58 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { tooltip } from 'leonardo-ui';
 
-const LuiSearch = ({
-  clear, inverse, placeholder, value, ...otherProps
-}) => {
+class LuiSearch extends React.Component {
+static propTypes = {
+  clear: PropTypes.func.isRequired,
+  inverse: PropTypes.bool,
+  placeholder: PropTypes.string,
+  value: PropTypes.string.isRequired,
+  otherProps: PropTypes.object,
+  tooltipDock: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+  tooltipContent: PropTypes.string,
+};
+static defaultProps = {
+  inverse: false,
+  placeholder: 'Search',
+  otherProps: null,
+  tooltipDock: 'top',
+  tooltipContent: null,
+};
+
+componentDidMount() {
+  const { element } = this;
+  const { tooltipDock, tooltipContent } = this.props;
+  if (tooltipContent) {
+    let myTooltip;
+    element.addEventListener('mouseover', () => {
+      const options = {
+        alignTo: element,
+        dock: tooltipDock,
+        content: `<span>${tooltipContent}</span>`,
+      };
+      myTooltip = tooltip(options);
+    });
+    element.addEventListener('mouseout', () => {
+      if (myTooltip) {
+        myTooltip.close();
+      }
+    });
+  }
+}
+
+render() {
+  const {
+    clear, inverse, placeholder, value, tooltipContent, ...otherProps
+  } = this.props;
   const button = (value.length) ? (
     <button className="lui-search__clear-button" tabIndex={0} key="clear" onClick={clear}>
-      <span className="lui-icon  lui-icon--small  lui-icon--close" />
+      <span className="lui-icon  lui-icon--small  lui-icon--close" ref={node => this.element = node} />
     </button>
   ) : '';
   return (
     <div className={(inverse) ? 'lui-search lui-search--inverse' : 'lui-search'} >
-      <span className="lui-icon  lui-icon--search  lui-search__search-icon" />
+      <span className="lui-icon  lui-icon--search  lui-search__search-icon" ref={node => this.element = node} aria-haspopup="true" />
       <input
         className="lui-search__input"
         maxLength="255"
@@ -23,18 +64,7 @@ const LuiSearch = ({
       { button }
     </div>
   );
-};
-LuiSearch.propTypes = {
-  clear: PropTypes.func.isRequired,
-  inverse: PropTypes.bool,
-  placeholder: PropTypes.string,
-  value: PropTypes.string.isRequired,
-  otherProps: PropTypes.object,
-};
-LuiSearch.defaultProps = {
-  inverse: false,
-  placeholder: 'Search',
-  otherProps: null,
-};
+}
+}
 
 export default LuiSearch;
