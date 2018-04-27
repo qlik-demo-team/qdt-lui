@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const LuiButton = ({
-  children, type, dialog, color, rounded, active, disabled, block, size,
+  children, type, dialog, color, rounded, active, disabled, block, size, onClick,
 }) => (
   <button
     className={`
@@ -15,6 +15,7 @@ const LuiButton = ({
         ${block ? 'lui-button--block' : null}
         ${size ? `lui-button--${size}` : null}
       `}
+    onClick={onClick}
   >
     {children}
   </button>
@@ -29,6 +30,7 @@ LuiButton.propTypes = {
   disabled: PropTypes.bool,
   block: PropTypes.bool,
   size: PropTypes.oneOf(['large', 'x-large']),
+  onClick: PropTypes.func,
 };
 LuiButton.defaultProps = {
   children: null,
@@ -40,6 +42,7 @@ LuiButton.defaultProps = {
   disabled: null,
   block: null,
   size: null,
+  onClick: null,
 };
 
 export default LuiButton;
