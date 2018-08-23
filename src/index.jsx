@@ -10,6 +10,8 @@ import LuiIcon from './components/LuiIcon';
 import LuiList from './components/LuiList';
 import LuiListItem from './components/LuiListItem';
 import LuiSearch from './components/LuiSearch';
+import LuiTabset from './components/LuiTabset';
+import LuiTab from './components/LuiTab';
 
-export { LuiButton, LuiDialog, LuiDialogBody, LuiDialogFooter, LuiDialogHeader, LuiDropdown, LuiIcon, LuiList, LuiListItem, LuiSearch };
+export { LuiButton, LuiDialog, LuiDialogBody, LuiDialogFooter, LuiDialogHeader, LuiDropdown, LuiIcon, LuiList, LuiListItem, LuiSearch, LuiTabset, LuiTab };
 
