@@ -27,11 +27,11 @@ class LuiDialog extends React.Component {
 
   render() {
     const {
-      children, isOpen, width,
+      children, isOpen, width, handleClose,
     } = this.props;
     return (
       <div className="lui-dialog-container" style={{ display: isOpen ? 'flex' : 'none' }}>
-        <div className="lui-modal-background" />
+        <div className="lui-modal-background" onClick={handleClose} role="button" tabIndex={0} />
         <div className="lui-dialog" style={{ width }}>
           {children}
         </div>

@@ -1,6 +1,6 @@
 {
   "name": "qdt-lui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "lui react components",
   "main": "dist/qdt-lui.js",
   "author": "The Demo Team",
