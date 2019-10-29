@@ -12,6 +12,7 @@ class LuiDropdown extends React.Component {
     style: PropTypes.object,
     toggle: PropTypes.func,
   };
+
   static defaultProps = {
     children: null,
     className: null,
@@ -27,6 +28,7 @@ class LuiDropdown extends React.Component {
   componentDidMount() {
     window.addEventListener('click', this.handleClick);
   }
+
   componentWillUnmount() {
     window.removeEventListener('click', this.handleClick);
   }
@@ -48,7 +50,7 @@ class LuiDropdown extends React.Component {
     const [value, menu, ...other] = children;
     return (
       <div
-        ref={node => this.node = node}
+        ref={(node) => this.node = node}
         className={className}
         style={{ position: 'relative', ...style }}
       >

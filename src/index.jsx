@@ -1,5 +1,5 @@
 import 'leonardo-ui/dist/leonardo-ui.css';
-import './styles/index.less';
+import './styles/index.scss';
 import LuiButton from './components/LuiButton';
 import LuiDialog from './components/LuiDialog';
 import LuiDialogBody from './components/LuiDialogBody';
@@ -13,5 +13,6 @@ import LuiSearch from './components/LuiSearch';
 import LuiTabset from './components/LuiTabset';
 import LuiTab from './components/LuiTab';
 
-export { LuiButton, LuiDialog, LuiDialogBody, LuiDialogFooter, LuiDialogHeader, LuiDropdown, LuiIcon, LuiList, LuiListItem, LuiSearch, LuiTabset, LuiTab };
-
+export {
+  LuiButton, LuiDialog, LuiDialogBody, LuiDialogFooter, LuiDialogHeader, LuiDropdown, LuiIcon, LuiList, LuiListItem, LuiSearch, LuiTabset, LuiTab,
+};

@@ -13,6 +13,7 @@ class LuiSearch extends React.Component {
     tooltipContent: PropTypes.string,
     onGo: PropTypes.func,
   };
+
   static defaultProps = {
     inverse: false,
     placeholder: 'Search',
@@ -48,8 +49,8 @@ class LuiSearch extends React.Component {
       clear, inverse, placeholder, value, tooltipContent, onGo, ...otherProps
     } = this.props;
     return (
-      <div className={(inverse) ? 'lui-search lui-search--inverse' : 'lui-search'} >
-        <span className="lui-icon  lui-icon--search  lui-search__search-icon" ref={node => this.element = node} aria-haspopup="true" />
+      <div className={(inverse) ? 'lui-search lui-search--inverse' : 'lui-search'}>
+        <span className="lui-icon  lui-icon--search  lui-search__search-icon" ref={(node) => this.element = node} aria-haspopup="true" />
         <input
           className="lui-search__input"
           maxLength="255"
@@ -60,7 +61,7 @@ class LuiSearch extends React.Component {
         />
         {!!value.length && (
           <button className="lui-search__clear-button" tabIndex={0} key="clear" onClick={clear}>
-            <span className="lui-icon  lui-icon--small  lui-icon--close" ref={node => this.element = node} />
+            <span className="lui-icon  lui-icon--small  lui-icon--close" ref={(node) => this.element = node} />
           </button>
         )}
         {!!onGo && (

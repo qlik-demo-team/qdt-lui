@@ -8,6 +8,7 @@ class LuiDialog extends React.Component {
     isOpen: PropTypes.bool.isRequired,
     handleClose: PropTypes.func.isRequired,
   };
+
   static defaultProps = {
     children: null,
     width: '400px',
@@ -17,6 +18,7 @@ class LuiDialog extends React.Component {
   componentDidMount() {
     window.addEventListener('keyup', this.handleKeyUp);
   }
+
   componentWillUnmount() {
     window.removeEventListener('keyup', this.handleKeyUp);
   }

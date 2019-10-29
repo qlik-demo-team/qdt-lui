@@ -1,9 +1,14 @@
 const path = require('path');
 const webpack = require('webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   devtool: 'source-map',
-  entry: './src/index',
+  entry: {
+    "qdt-lui": "./src/index",
+    "qdt-lui.min": "./src/index",
+  },
+  mode: 'production',
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: 'node_modules/qdt-lui/dist/',
@@ -13,51 +18,35 @@ module.exports = {
     umdNamedDefine: true
   },
   module: {
-    loaders: [
-      {
-        include: /\.(js|jsx)$/,
-        exclude: /(node_modules)/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['latest', 'react'],
-          plugins: ['transform-decorators-legacy', 'transform-object-rest-spread', 'transform-class-properties', 'transform-runtime'],
-        },
-      },
+    rules: [
       {
         test: /\.(js|jsx)$/,
-        exclude: /(node_modules)/,
-        loader: 'eslint-loader',
-        options: {
-          fix: true
-        },
-      },
-      {
-        test: /\.(less|css)$/,
-        use: [{
-          loader: 'style-loader', // inject CSS to page
-        }, {
-          loader: 'css-loader', // translates CSS into CommonJS modules
-        }, {
-          loader: 'postcss-loader', // Run post css actions
-          options: {
-            plugins() { // post css plugins, can be exported to postcss.config.js
-              return [
-                require('precss'),
-                require('autoprefixer'),
-              ];
+        exclude: /node_modules/,
+        use: [
+          'babel-loader',
+          {
+            loader: 'eslint-loader',
+            options: {
+              fix: true,
             },
           },
-        }, {
-          loader: 'less-loader', // compiles Less to CSS
-        }],
+        ],
       },
+      {
+        test: /\.(scss|css)$/,
+        use: [
+          "style-loader", // creates style nodes from JS strings
+          "css-loader", // translates CSS into CommonJS
+          "sass-loader" // compiles Sass to CSS, using Node Sass by default
+        ],
+      },    
       {
         test: /\.(ttf|eot|woff|woff2)$/,
         loader: "file-loader",
         options: {
           name: "[name].[ext]",
-        },
-      },
+        },  
+      }, 
     ],
   },
   plugins: [
@@ -71,36 +60,26 @@ module.exports = {
             callback();
         })
     },
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compressor: {
-        warnings: false
-      }
-    })
   ],
   resolve: {
     extensions: ['.js', '.jsx']
   },
-  externals: [
-    {
-      react: {
-        root: 'React',
-        commonjs2: 'react',
-        commonjs: 'react',
-        amd: 'react'
-      }
-    },
-    {
-      'react-dom': {
-        root: 'ReactDOM',
-        commonjs2: 'react-dom',
-        commonjs: 'react-dom',
-        amd: 'react-dom'
-      }
-    }
-  ],
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        include: /\.min\.js$/,
+        uglifyOptions: {
+          warnings: true,
+          parse: {},
+          compress: false,
+          mangle: true, // Note `mangle.properties` is `false` by default.
+          output: null,
+          toplevel: false,
+          nameCache: null,
+          ie8: false,
+          keep_fnames: false,
+        },
+      }),
+    ],
+  },
 };
