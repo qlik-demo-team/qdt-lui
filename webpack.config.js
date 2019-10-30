@@ -12,10 +12,11 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: 'node_modules/qdt-lui/dist/',
-    filename: 'qdt-lui.js',
+    filename: "[name].js",
     library: 'QdtLui',
     libraryTarget: 'umd',
-    umdNamedDefine: true
+    umdNamedDefine: true,
+    jsonpFunction: 'jsonpQdtLui'
   },
   module: {
     rules: [

@@ -1,7 +1,7 @@
 {
   "name": "qdt-lui",
   "version": "0.1.1",
-  "description": "lui react components",
+  "description": "Leonardo UI react components",
   "main": "dist/qdt-lui.js",
   "author": "The Demo Team",
   "license": "MIT",
@@ -20,15 +20,12 @@
   "dependencies": {
     "leonardo-ui": "^1.7.1",
     "prop-types": "15.7.2",
-    "qdt-lui": "^0.1.1",
-    "react": "16.9.0",
-    "react-dom": "16.9.0",
     "uglifyjs-webpack-plugin": "^2.1.2",
     "ws": "^7.0.0"
   },
   "peerDependencies": {
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "react": "16.9.0",
+    "react-dom": "16.9.0"
   },
   "devDependencies": {
     "@babel/core": "7.6.4",
