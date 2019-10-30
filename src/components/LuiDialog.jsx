@@ -1,43 +1,40 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-class LuiDialog extends React.Component {
-  static propTypes = {
-    children: PropTypes.node,
-    width: PropTypes.string,
-    isOpen: PropTypes.bool.isRequired,
-    handleClose: PropTypes.func.isRequired,
-  };
-  static defaultProps = {
-    children: null,
-    width: '400px',
+const LuiDialog = ({
+  children, isOpen, width, handleClose,
+}) => {
+  const handleKeyUp = (event) => {
+    if (event.keyCode === 27) handleClose(event);
   };
 
+  useEffect(() => {
+    window.addEventListener('keyup', handleKeyUp);
+    return () => {
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  });
 
-  componentDidMount() {
-    window.addEventListener('keyup', this.handleKeyUp);
-  }
-  componentWillUnmount() {
-    window.removeEventListener('keyup', this.handleKeyUp);
-  }
-
-  handleKeyUp = (event) => {
-    if (event.keyCode === 27) this.props.handleClose(event);
-  }
-
-  render() {
-    const {
-      children, isOpen, width, handleClose,
-    } = this.props;
-    return (
-      <div className="lui-dialog-container" style={{ display: isOpen ? 'flex' : 'none' }}>
-        <div className="lui-modal-background" onClick={handleClose} role="button" tabIndex={0} />
-        <div className="lui-dialog" style={{ width }}>
-          {children}
-        </div>
+  return (
+    <div className="lui-dialog-container" style={{ display: isOpen ? 'flex' : 'none' }}>
+      <div className="lui-modal-background" onClick={handleClose} role="button" tabIndex={0} />
+      <div className="lui-dialog" style={{ width }}>
+        {children}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+LuiDialog.propTypes = {
+  children: PropTypes.node,
+  width: PropTypes.string,
+  isOpen: PropTypes.bool.isRequired,
+  handleClose: PropTypes.func.isRequired,
+};
+
+LuiDialog.defaultProps = {
+  children: null,
+  width: '400px',
+};
 
 export default LuiDialog;

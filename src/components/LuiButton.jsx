@@ -16,6 +16,7 @@ const LuiButton = ({
         ${size ? `lui-button--${size}` : null}
       `}
     onClick={onClick}
+    type="button"
   >
     {children}
   </button>
