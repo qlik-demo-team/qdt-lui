@@ -1,6 +1,6 @@
 {
   "name": "qdt-lui",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Leonardo UI react components",
   "main": "dist/qdt-lui.js",
   "author": "The Demo Team",
