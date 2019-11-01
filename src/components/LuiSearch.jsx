@@ -7,20 +7,19 @@ let _tooltip;
 const LuiSearch = ({
   clear, inverse, placeholder, value, tooltipDock, tooltipContent, onGo, ...otherProps
 }) => {
-  const node = useRef(null);
-
+  const nodeEl = useRef(null);
   useEffect(() => {
     (async () => {
       if (tooltipContent) {
-        node.addEventListener('mouseover', () => {
+        nodeEl.current.addEventListener('mouseover', () => {
           const options = {
-            alignTo: node,
+            alignTo: nodeEl,
             dock: tooltipDock,
             content: `<span>${tooltipContent}</span>`,
           };
           _tooltip = tooltip(options);
         });
-        node.addEventListener('mouseout', () => {
+        nodeEl.current.addEventListener('mouseout', () => {
           if (_tooltip) {
             _tooltip.close();
           }
@@ -28,13 +27,13 @@ const LuiSearch = ({
       }
     })();
     return () => {
-      node.removeEventListener('mouseover');
-      node.removeEventListener('mouseout');
+      nodeEl.current.removeEventListener('mouseover');
+      nodeEl.current.removeEventListener('mouseout');
     };
   }, [tooltipContent, tooltipDock]);
 
   return (
-    <div className={(inverse) ? 'lui-search lui-search--inverse' : 'lui-search'} ref={node}>
+    <div className={(inverse) ? 'lui-search lui-search--inverse' : 'lui-search'} ref={nodeEl}>
       <span className="lui-icon  lui-icon--search  lui-search__search-icon" aria-haspopup="true" />
       <input
         className="lui-search__input"
